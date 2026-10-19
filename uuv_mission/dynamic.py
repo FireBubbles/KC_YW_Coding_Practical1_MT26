@@ -111,15 +111,3 @@ class ClosedLoop:
         disturbances = np.random.normal(0, variance, len(mission.reference))
         return self.simulate(mission, disturbances)
 
-class Controller:
-    KP = 0.15
-    KD = 0.6
-
-    def __init__(self):
-        self.prev_error = 0.0
-
-    def compute_action(self, curr_reference, curr_observation):
-        curr_error = curr_reference - curr_observation
-        action = self.KP * curr_error + self.KD * (curr_error - self.prev_error)
-        self.prev_error = curr_error
-        return action
